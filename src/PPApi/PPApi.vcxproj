@@ -142,7 +142,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\external\chromium\**\*.cc" />
+    <ClCompile Include="..\..\external\chromium\ppapi\cpp\*.cc" />
+    <ClCompile Include="..\..\external\chromium\ppapi\utility\**\*.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
