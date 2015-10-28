@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+      <script>
+          window.onload = function () {
+              //window.setTimeout(function () {
+              //},
+              //5000);
+          }
+
+          function insertPlugin() {
+              var pluginTarget = document.getElementById('pluginTarget');
+              var embed = document.createElement('embed');
+              embed.id = 'renderer';
+              embed.type = 'application/x-ppapi-helloworld';
+              embed.width = 300;
+              embed.height = 200;
+              pluginTarget.appendChild(embed);
+          }
+      </script>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+      <p>
+          We are using node
+          <script>document.write(process.versions.node)</script>,
+          Chrome
+          <script>document.write(process.versions.chrome)</script>,
+          and Electron
+          <script>document.write(process.versions.electron)</script>.
+      </p>
+      <button onclick="insertPlugin()">Insert plugin</button>
+      <div id="pluginTarget">
+          <!--<embed id="renderer" type="application/x-ppapi-helloworld" width="300" height="200" />-->
+      </div>
+      <p>
+          This appears below the plugin.
+      </p>
+  </body>
+</html>
