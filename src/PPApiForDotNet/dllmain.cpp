@@ -6,6 +6,9 @@ BOOL APIENTRY DllMain( HMODULE hModule,
                        LPVOID lpReserved
 					 )
 {
+	// For diagnostic purposes, crash so we know we've reach this point.
+	RaiseFailFastException(NULL, NULL, 0);
+	
 	switch (ul_reason_for_call)
 	{
 	case DLL_PROCESS_ATTACH:
