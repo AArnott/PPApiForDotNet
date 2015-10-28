@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 #include "Stdafx.h"
+#include "RuntimeHostV4.h"
 
 #include <algorithm>
 #include "ppapi/c/pp_input_event.h"
@@ -138,6 +139,17 @@ public:
 namespace pp {
 	// Factory function for your specialization of the Module object.
 	Module* CreateModule() {
+		DWORD dwResult;
+		HRESULT hr = RuntimeHostV4Demo2(
+			L"C:\\git\\PPApiForDotNet\\bin\\Win32\\Debug\\PPApiInCSharp.dll",
+			L"PPApiInCSharp.Program",
+			L"Main",
+			L"My argument",
+			&dwResult);
+		if (FAILED(hr)) {
+			return nullptr;
+		}
+
 		return new MyModule();
 	}
 }  // namespace pp
