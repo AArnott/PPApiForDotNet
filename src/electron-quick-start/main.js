@@ -5,7 +5,7 @@ var ipc = require('ipc');
 // Report crashes to our server.
 require('crash-reporter').start();
 
-var ppapiPath = 'file://' + __dirname + '\\..\\..\\bin\\Win32\\Debug\\PPApiForDotNet.dll';
+var ppapiPath = __dirname + '\\..\\..\\bin\\Win32\\Debug\\PPApiForDotNet.dll';
 console.log('PPAPI path ' + ppapiPath);
 app.commandLine.appendSwitch('register-pepper-plugins', ppapiPath + ';application/x-ppapi-helloworld');
 
