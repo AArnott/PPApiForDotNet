@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 #include "Stdafx.h"
+#include "CoreClrHost.h"
 #include "RuntimeHostV4.h"
 
 #include <algorithm>
@@ -136,32 +137,46 @@ public:
 		return new MyInstance(instance);
 	}
 };
+
+typedef int(*Fn_entrypoint)(
+    const wchar_t* arg);
+
 namespace pp {
 	// Factory function for your specialization of the Module object.
 	Module* CreateModule() {
-		// Discover the path to this exe's module. All other files are expected to be in the same directory.
-		wchar_t thisModulePath[MAX_PATH];
-		DWORD thisModuleLength = ::GetModuleFileNameW(::GetModuleHandleW(L"PPApiForDotNet"), thisModulePath, MAX_PATH);
+        HRESULT hr = StartClrHost();
+        Fn_entrypoint myDel;
+        CreateManagedDelegate(
+            L"PPApiInCSharp",
+            L"PPApiInCSharp.Program",
+            L"Main",
+            L"PPApiForDotNet",
+            (void**)&myDel);
+        myDel(L"Hello, World!");
 
-		// Search for the last backslash in the host path.
-		int lastBackslashIndex = wcsrchr(thisModulePath, L'\\') - thisModulePath;
+		////// Discover the path to this exe's module. All other files are expected to be in the same directory.
+		////wchar_t thisModulePath[MAX_PATH];
+		////DWORD thisModuleLength = ::GetModuleFileNameW(::GetModuleHandleW(L"PPApiForDotNet"), thisModulePath, MAX_PATH);
 
-		// Copy the directory path
-		wchar_t hostDirectoryPath[MAX_PATH];
-		wcsncpy_s(hostDirectoryPath, thisModulePath, lastBackslashIndex + 1);
+		////// Search for the last backslash in the host path.
+		////int lastBackslashIndex = wcsrchr(thisModulePath, L'\\') - thisModulePath;
 
-		// Calculate the expected path to the .NET assembly:
-		wchar_t assemblyPath[MAX_PATH];
-		wcsncpy_s(assemblyPath, thisModulePath, lastBackslashIndex + 1);
-		wcsncat_s(assemblyPath, MAX_PATH, L"PPApiInCSharp.dll", 50);
+		////// Copy the directory path
+		////wchar_t hostDirectoryPath[MAX_PATH];
+		////wcsncpy_s(hostDirectoryPath, thisModulePath, lastBackslashIndex + 1);
 
-		DWORD dwResult;
-		HRESULT hr = RuntimeHostV4Demo2(
-			assemblyPath,
-			L"PPApiInCSharp.Program",
-			L"Main",
-			L"My argument",
-			&dwResult);
+		////// Calculate the expected path to the .NET assembly:
+		////wchar_t assemblyPath[MAX_PATH];
+		////wcsncpy_s(assemblyPath, thisModulePath, lastBackslashIndex + 1);
+		////wcsncat_s(assemblyPath, MAX_PATH, L"PPApiInCSharp.dll", 50);
+
+		////DWORD dwResult;
+		////HRESULT hr = RuntimeHostV4Demo2(
+		////	assemblyPath,
+		////	L"PPApiInCSharp.Program",
+		////	L"Main",
+		////	L"My argument",
+		////	&dwResult);
 		if (FAILED(hr)) {
 			return nullptr;
 		}
