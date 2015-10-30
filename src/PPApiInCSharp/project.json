@@ -1,10 +1,17 @@
-{
+﻿{
+  "supports": {
+    "net46.app": { },
+    "dnxcore50.app": { }
+  },
   "dependencies": {
+    "System.Runtime": "4.0.20"
   },
   "frameworks": {
-    ".NETPortable,Version=v4.5,Profile=Profile259": { }
+    "dnxcore50": {
+      "imports": "portable-net452"
+    }
   },
   "runtimes": {
-    "win-anycpu": {}
+    "win7": { }
   }
 }
