@@ -138,8 +138,8 @@ public:
 	}
 };
 
-typedef int(*Fn_entrypoint)(
-    const wchar_t* arg);
+typedef int(__stdcall *Fn_entrypoint)(
+    const char* arg);
 
 namespace pp {
 	// Factory function for your specialization of the Module object.
@@ -147,11 +147,12 @@ namespace pp {
         HRESULT hr = StartClrHost();
         Fn_entrypoint myDel;
         CreateManagedDelegate(
-            L"PPApiInCSharp",
-            L"PPApiInCSharp.Program",
+            L"PPApiInCSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            L"Program",
             L"Main",
             (void**)&myDel);
-        myDel(L"Hello, World!");
+        int result = myDel("Hello, World!");
+        printf("Call to managed code returned: %d\n", result);
 
 		////// Discover the path to this exe's module. All other files are expected to be in the same directory.
 		////wchar_t thisModulePath[MAX_PATH];
