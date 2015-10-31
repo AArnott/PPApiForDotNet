@@ -9,10 +9,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PPApi", "PPApi\PPApi.vcxpro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3D2CAD1-4CAD-4CE0-8F3B-CC025C641C6C}"
 	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+		.nuget\packages.config = .nuget\packages.config
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PPApiInCSharp", "PPApiInCSharp\PPApiInCSharp.csproj", "{4196C5B7-163B-4EA4-BC8B-99B0DE60A312}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreCLRHost", "CoreCLRHost\CoreCLRHost.vcxproj", "{5720B091-8D73-4ACA-A99F-947577909BFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +60,16 @@ Global
 		{4196C5B7-163B-4EA4-BC8B-99B0DE60A312}.Release|x64.Build.0 = Release|Any CPU
 		{4196C5B7-163B-4EA4-BC8B-99B0DE60A312}.Release|x86.ActiveCfg = Release|Any CPU
 		{4196C5B7-163B-4EA4-BC8B-99B0DE60A312}.Release|x86.Build.0 = Release|Any CPU
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Debug|x64.ActiveCfg = Debug|x64
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Debug|x64.Build.0 = Debug|x64
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Debug|x86.ActiveCfg = Debug|Win32
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Debug|x86.Build.0 = Debug|Win32
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Release|Any CPU.ActiveCfg = Release|Win32
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Release|x64.ActiveCfg = Release|x64
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Release|x64.Build.0 = Release|x64
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Release|x86.ActiveCfg = Release|Win32
+		{5720B091-8D73-4ACA-A99F-947577909BFE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
