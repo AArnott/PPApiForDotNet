@@ -239,10 +239,11 @@ HRESULT StartClrHost()
         return E_FAIL;
     }
 
-    if (coreclr_initialize(appDir.u8string().c_str(), "PPAPIForDotNet", sizeof(property_keys) / sizeof(char*), property_keys, property_values, &s_clrHostHandle, &s_clrDomainId))
+    HRESULT hr = coreclr_initialize(pzAppDir.c_str(), "PPAPIForDotNet", sizeof(property_keys) / sizeof(char*), property_keys, property_values, &s_clrHostHandle, &s_clrDomainId);
+    if (FAILED(hr))
     {
         printf("Failed to initialize coreclr\n");
-        return E_FAIL;
+        return hr;
     }
 
     printf("CoreClr initialized\n");
@@ -267,11 +268,12 @@ HRESULT CreateManagedDelegate(
         return E_FAIL;
     }
 
-    if (coreclr_create_delegate(s_clrHostHandle, s_clrDomainId, assemblyName, className, methodName, pfnDelegate))
+    HRESULT hr = coreclr_create_delegate(s_clrHostHandle, s_clrDomainId, assemblyName, className, methodName, pfnDelegate);
+    if (FAILED(hr))
     {
         printf("Failed call to coreclr_create_delegate\n");
-        return E_FAIL;
+        return hr;
     }
 
-    return S_OK;
+    return hr;
 }
