@@ -20,6 +20,8 @@ int main()
     if (FAILED(hr)) return 2;
     int result = del("Hello world!");
 
+    printf("Call to managed code returned: %d\n", result);
+
     return 0;
 }
 

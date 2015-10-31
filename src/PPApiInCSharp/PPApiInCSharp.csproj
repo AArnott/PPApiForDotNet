@@ -18,7 +18,7 @@
     <BaseIntermediateOutputPath>..\..\obj\$(MSBuildProjectName)\$(Configuration)\</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
-    <CopyNuGetImplementations>true</CopyNuGetImplementations>
+    <!--<CopyNuGetImplementations>true</CopyNuGetImplementations>-->
     <BaseNuGetRuntimeIdentifier>win7</BaseNuGetRuntimeIdentifier>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
+    <None Include="$(UserProfile)\.nuget\packages\system.runtime\4.0.20\lib\DNXCore50\System.Runtime.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <PropertyGroup>
