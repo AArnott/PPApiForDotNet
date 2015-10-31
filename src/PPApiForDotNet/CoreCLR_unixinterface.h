@@ -1,6 +1,6 @@
 #pragma once
 
-typedef int(*Fn_coreclr_initialize)(
+typedef int(__stdcall *Fn_coreclr_initialize)(
 	const char* exePath,
 	const char* appDomainFriendlyName,
 	int propertyCount,
@@ -9,7 +9,7 @@ typedef int(*Fn_coreclr_initialize)(
 	void** hostHandle,
 	unsigned int* domainId);
 
-typedef int(*Fn_coreclr_create_delegate)(
+typedef int(__stdcall *Fn_coreclr_create_delegate)(
 	void* hostHandle,
 	unsigned int domainId,
 	const char* entryPointAssemblyName,
