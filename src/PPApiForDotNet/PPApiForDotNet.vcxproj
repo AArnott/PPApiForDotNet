@@ -174,7 +174,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\packages\Microsoft.NETCore.Runtime.CoreCLR-x86.1.0.0\runtimes\win7-x86\**\*.dll">
+    <Content Include="..\..\packages\Microsoft.NETCore.Runtime.CoreCLR-x86.1.0.1-beta-23225\runtimes\win7-x86\**\*.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
