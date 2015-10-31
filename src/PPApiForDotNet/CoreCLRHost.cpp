@@ -24,7 +24,6 @@ static const path coreCLRDll = _T("coreclr.dll");
 static const wchar_t PATH_LIST_SEPARATOR_STR = L';';
 #endif
 
-static bool s_clrStartAttempted = false;
 static void* s_clrHostHandle = nullptr;
 static unsigned int s_clrDomainId = 0;
 static HMODULE s_coreclrModule = nullptr;
@@ -257,11 +256,6 @@ HRESULT CreateManagedDelegate(
     _Out_ void **pfnDelegate              // Output Managed function pointer
     )
 {
-    if (!s_clrStartAttempted)
-    {
-        return E_UNEXPECTED;
-    }
-
     CW2A assemblyName(szAssemblyName.c_str(), CP_UTF8);
     CW2A className(szClassName.c_str(), CP_UTF8);
     CW2A methodName(szMethodName.c_str(), CP_UTF8);
