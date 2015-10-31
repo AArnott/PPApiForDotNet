@@ -5,7 +5,7 @@
 #include "C:\git\PPApiForDotNet\src\PPApiForDotNet\CoreCLRHost.h"
 
 typedef int(__stdcall *Fn_entrypoint)(
-    const wchar_t* arg);
+    const char* arg);
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
         L"Main",
         (void**)&del);
     if (FAILED(hr)) return 2;
-    int result = del(L"Hello world!");
+    int result = del("Hello world!");
 
     return 0;
 }
