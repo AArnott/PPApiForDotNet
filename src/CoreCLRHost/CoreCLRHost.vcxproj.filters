@@ -35,5 +35,8 @@
     <ClCompile Include="..\PPApiForDotNet\CoreCLRHost.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\PPApiForDotNet\Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

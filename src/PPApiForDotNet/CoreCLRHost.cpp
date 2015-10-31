@@ -6,6 +6,7 @@
 #include <memory>
 #include <filesystem>
 #include "CoreClrHost.h"
+#include "Utilities.h"
 
 using namespace std;
 using namespace std::experimental::filesystem::v1;
@@ -60,16 +61,6 @@ private:
 public:
     // The path to the directory that CoreCLR is in
     path m_coreCLRDirectoryPath;
-
-    static path GetModuleDir()
-    {
-        // Discover the path to this exe's module. All other files are expected to be in the same directory.
-        wchar_t thisModulePath[MAX_PATH];
-        DWORD thisModuleLength = ::GetModuleFileNameW(::GetModuleHandleW(L"PPApiForDotNet"), thisModulePath, MAX_PATH);
-        path modulePath(thisModulePath);
-        path moduleDir = modulePath.remove_filename();
-        return moduleDir;
-    }
 
     HostEnvironment()
     {
@@ -167,7 +158,7 @@ HRESULT StartClrHost()
 
     //-------------------------------------------------------------
 
-    path appDir(HostEnvironment::GetModuleDir());
+    path appDir(GetModuleDir());
     path appLocalWinmetadata = appDir / _T("WinMetadata");
 
     path appNiPath(appDir);

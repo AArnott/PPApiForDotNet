@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\PPApiForDotNet\CoreCLRHost.cpp" />
+    <ClCompile Include="..\PPApiForDotNet\Utilities.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

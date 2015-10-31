@@ -2,8 +2,15 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 #include "Stdafx.h"
+#include "Utilities.h"
+
+#define UseCoreCLR
+
+#ifdef UseCoreCLR
 #include "CoreClrHost.h"
+#else
 #include "RuntimeHostV4.h"
+#endif
 
 #include <algorithm>
 #include "ppapi/c/pp_input_event.h"
@@ -15,6 +22,9 @@
 #include "ppapi/cpp/size.h"
 #include "ppapi/cpp/view.h"
 #include "ppapi/utility/graphics/paint_manager.h"
+
+using namespace std::experimental::filesystem::v1;
+
 // Number of pixels to each side of the center of the square that we draw.
 static const int kSquareRadius = 2;
 // We identify our square by the center point. This computes the rect for the
@@ -144,6 +154,7 @@ typedef int(__stdcall *Fn_entrypoint)(
 namespace pp {
 	// Factory function for your specialization of the Module object.
 	Module* CreateModule() {
+#ifdef UseCoreCLR
         HRESULT hr = StartClrHost();
         Fn_entrypoint myDel;
         CreateManagedDelegate(
@@ -151,32 +162,22 @@ namespace pp {
             L"Program",
             L"Main",
             (void**)&myDel);
-        int result = myDel("Hello, World!");
+        int result = myDel("My argument");
         printf("Call to managed code returned: %d\n", result);
+#else
+        // Discover the path to this exe's module. All other files are expected to be in the same directory.
+        path thisModulePath = GetModuleDir();
+        path assemblyPath = thisModulePath / L"PPApiInCSharp.dll";
 
-		////// Discover the path to this exe's module. All other files are expected to be in the same directory.
-		////wchar_t thisModulePath[MAX_PATH];
-		////DWORD thisModuleLength = ::GetModuleFileNameW(::GetModuleHandleW(L"PPApiForDotNet"), thisModulePath, MAX_PATH);
+		DWORD dwResult;
+		HRESULT hr = RuntimeHostV4Demo2(
+			assemblyPath.c_str(),
+			L"Program",
+			L"Main",
+			L"My argument",
+			&dwResult);
+#endif
 
-		////// Search for the last backslash in the host path.
-		////int lastBackslashIndex = wcsrchr(thisModulePath, L'\\') - thisModulePath;
-
-		////// Copy the directory path
-		////wchar_t hostDirectoryPath[MAX_PATH];
-		////wcsncpy_s(hostDirectoryPath, thisModulePath, lastBackslashIndex + 1);
-
-		////// Calculate the expected path to the .NET assembly:
-		////wchar_t assemblyPath[MAX_PATH];
-		////wcsncpy_s(assemblyPath, thisModulePath, lastBackslashIndex + 1);
-		////wcsncat_s(assemblyPath, MAX_PATH, L"PPApiInCSharp.dll", 50);
-
-		////DWORD dwResult;
-		////HRESULT hr = RuntimeHostV4Demo2(
-		////	assemblyPath,
-		////	L"PPApiInCSharp.Program",
-		////	L"Main",
-		////	L"My argument",
-		////	&dwResult);
 		if (FAILED(hr)) {
 			return nullptr;
 		}
