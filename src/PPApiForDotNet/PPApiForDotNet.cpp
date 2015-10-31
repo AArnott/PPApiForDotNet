@@ -150,7 +150,6 @@ namespace pp {
             L"PPApiInCSharp",
             L"PPApiInCSharp.Program",
             L"Main",
-            L"PPApiForDotNet",
             (void**)&myDel);
         myDel(L"Hello, World!");
 
